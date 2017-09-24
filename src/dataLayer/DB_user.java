@@ -8,10 +8,10 @@ public class DB_user {
 
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/webapptutorial";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/webapptutorial";
 
-    static final String USER ="root";
-    static final String PASS="root";
+    static final String USER ="webappuser";
+    static final String PASS="test123";
 
     public boolean isValidUserLogin(String userName, String userPassword){
         boolean isValidUser = false;
@@ -24,14 +24,15 @@ public class DB_user {
             Class.forName("com.mysql.jdbc.Driver");
 
             System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             System.out.println("Creating Statement");
             stmt = conn.createStatement();
 
-            sql = "SELECT * FROM new_table WHERE user_nam = \""
+            sql = "SELECT * FROM users WHERE user_name = \""
                     + userName + "\"And user_password = \"" + userPassword + "\"";
 
-            System.out.println(sql+"hey");
+            System.out.println(sql);
 
             ResultSet rs = stmt.executeQuery(sql);
 
